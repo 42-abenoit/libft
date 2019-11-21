@@ -6,7 +6,7 @@
 /*   By: abenoit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 15:18:53 by abenoit           #+#    #+#             */
-/*   Updated: 2019/11/14 17:08:21 by abenoit          ###   ########.fr       */
+/*   Updated: 2019/11/19 14:41:00 by abenoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		ft_atoi(const char *str)
 			sign *= -1;
 		i++;
 	}
-	while (str[i] && ((str[i] > 47 && str[i] < 58)))
+	while (str[i] > 47 && str[i] < 58)
 	{
 		if (str[i] > 47 && str[i] < 58)
 			ret = (ret * 10) + (str[i] - 48);
