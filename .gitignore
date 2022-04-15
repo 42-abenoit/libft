@@ -1,0 +1,13 @@
+.*.swp
+.*.swo
+
+*.vim
+
+obj
+lib
+
+libft*.a
+
+test
+
+a.out

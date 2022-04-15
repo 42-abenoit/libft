@@ -1,37 +1,194 @@
+################################################################################
+################################################################################
+################################################################################
+################################################################################
+################################################################################
+################### ##         ##   ##               ##     ####################
+#########          ##              ##              ## ### #           ##########
+#########         ##         ##   ####           ##      ##           ##########
+#########        ##         ##   ##  ##         #####   #####         ##########
+#########       ##         ##   ##  ##         ##      ##             ##########
+#########      #########  ##   #####   #####  ##      ##              ##########
+################################################################################
+################################################################################
+################################################################################
+################################################################################
 
-SRCS	= ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c ft_itoa.c ft_memcpy.c ft_memccpy.c ft_memchr.c ft_memcmp.c ft_memmove.c ft_memset.c ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c ft_split.c ft_strchr.c ft_strdup.c ft_strjoin.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strmapi.c ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strtrim.c ft_substr.c ft_tolower.c ft_toupper.c
+################################################################################
+###################       General variables setup           ####################
+################################################################################
+SRC_DIR=src
 
-BSRC	= ft_lstadd_back.c	ft_lstadd_front.c	ft_lstlast.c	ft_lstnew.c	ft_lstsize.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
+OBJ_DIR=obj
 
-OBJS	= ${SRCS:.c=.o}
+INC_DIR=inc
 
-BONUS	= ${BSRC:.c=.o}
+LIB_DIR=lib
 
-NAME	= libft.a
+SRC_NAME=main.c
 
-LIB	= ar rc
-CC	= cc
-RM	= rm -f
+OBJ_NAME=$(SRC_NAME:.c=.o)
 
-CFLAGS	= -Wall -Werror -Wextra
+SRC=$(addprefix $(SRC_DIR)/,$(SRC_NAME))
 
-.c.o :
-		${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+OBJ=$(addprefix $(OBJ_DIR)/,$(OBJ_NAME))
 
-${NAME}:	${OBJS}
-		${LIB} ${NAME} ${OBJS}
+TEST=test
 
-all:		${NAME} bonus
+NAME=libft
 
+CC=clang
+
+LINK= ar -rc
+
+RM= rm -rf
+
+CFLAGS+= -Wall
+CFLAGS+= -Werror
+CFLAGS+= -Wextra
+CFLAGS+= -g
+CFLAGS+= -fsanitize=address
+
+INC= -I $(INC_DIR)
+
+LIB= -L $(LIB_DIR)
+
+################################################################################
+###################     Memory utilities variables          ####################
+################################################################################
+SRC_MEM_DIR=$(SRC_DIR)/mem
+
+OBJ_MEM_DIR=$(OBJ_DIR)/mem
+
+SRC_MEM_NAME=ft_memcpy.c
+
+OBJ_MEM_NAME=$(SRC_MEM_NAME:.c=.o)
+
+MEM_SRC=$(addprefix $(SRC_MEM_DIR)/,$(SRC_MEM_NAME))
+
+MEM_OBJ=$(addprefix $(OBJ_MEM_DIR)/,$(OBJ_MEM_NAME))
+
+MEM_NAME=$(LIB_DIR)/libft_mem.a
+
+ALL+= -lft_mem
+
+ALL_NAMES+= $(MEM_NAME)
+
+################################################################################
+###################     String utilities variables          ####################
+################################################################################
+SRC_STR_DIR=$(SRC_DIR)/str
+
+OBJ_STR_DIR=$(OBJ_DIR)/str
+
+SRC_STR_NAME=ft_putstr.c
+
+OBJ_STR_NAME=$(SRC_STR_NAME:.c=.o)
+
+STR_SRC=$(addprefix $(SRC_STR_DIR)/,$(SRC_STR_NAME)))
+
+STR_OBJ=$(addprefix $(OBJ_STR_DIR)/,$(OBJ_STR_NAME))
+
+STR_NAME=$(LIB_DIR)/libft_str.a
+
+ALL+= -lft_str
+
+ALL_NAMES+= $(STR_NAME)
+
+
+################################################################################
+###################     Type utilities variables            ####################
+################################################################################
+SRC_TYPES_DIR=$(SRC_DIR)/types
+
+OBJ_TYPES_DIR=$(OBJ_DIR)/types
+
+SRC_TYPES_NAME+=ft_isascii.c
+SRC_TYPES_NAME+=ft_isalpha.c
+SRC_TYPES_NAME+=ft_isdigit.c
+
+OBJ_TYPES_NAME=$(SRC_TYPES_NAME:.c=.o)
+
+TYPES_SRC=$(addprefix $(SRC_TYPES_DIR)/,$(SRC_TYPES_NAME))
+
+TYPES_OBJ=$(addprefix $(OBJ_TYPES_DIR)/, $(OBJ_TYPES_NAME))
+
+TYPES_NAME=$(LIB_DIR)/libft_types.a
+
+ALL+= -lft_types
+
+ALL_NAMES+= $(TYPES_NAME)
+
+################################################################################
+###################           General recipes               ####################
+################################################################################
+all:	$(TEST)
+
+$(TEST): $(ALL) $(OBJ)
+	$(CC) $(CFLAGS) -o $(TEST) $(OBJ) $(LIB) $(ALL) $(INC)
+
+$(ALL): $(ALL_NAMES)
+
+mem:	$(MEM_NAME)
+
+$(MEM_NAME):	$(MEM_OBJ) | $(LIB_DIR)
+	$(LINK) -o $(MEM_NAME) $(MEM_OBJ)
+
+str:	$(STR_NAME)
+
+$(STR_NAME):	$(STR_OBJ) | $(LIB_DIR)
+	$(LINK) -o $(STR_NAME) $(STR_OBJ)
+
+types:	$(TYPES_NAME)
+
+$(TYPES_NAME):	$(TYPES_OBJ) | $(LIB_DIR)
+	$(LINK) -o $(TYPES_NAME) $(TYPES_OBJ)
+
+################################################################################
+###################            Object recipes               ####################
+################################################################################
+
+$(OBJ_DIR)/%.o:	$(SRC_DIR)/%.c | $(OBJ_DIR)
+	$(CC) $(CFLAGS) $(INC) -c $< -o $@
+
+$(OBJ_MEM_DIR)/%.o:	$(SRC_MEM_DIR)/%.c | $(OBJ_MEM_DIR)
+	$(CC) $(CFLAGS) $(INC) -c $< -o $@
+
+$(OBJ_STR_DIR)/%.o:	$(SRC_STR_DIR)/%.c | $(OBJ_STR_DIR)
+	$(CC) $(CFLAGS) $(INC) -c $< -o $@
+
+$(OBJ_TYPES_DIR)/%.o:	$(SRC_TYPES_DIR)/%.c | $(OBJ_TYPES_DIR)
+	$(CC) $(CFLAGS) $(INC) -c $< -o $@
+
+################################################################################
+###################           Directory recipes             ####################
+################################################################################
+$(OBJ_DIR):
+	mkdir -p $@
+
+$(LIB_DIR):
+	mkdir -p $@
+
+$(OBJ_MEM_DIR):
+	mkdir -p $@
+
+$(OBJ_STR_DIR):
+	mkdir -p $@
+
+$(OBJ_TYPES_DIR):
+	mkdir -p $@
+
+################################################################################
+###################           Cleanup utilities             ####################
+################################################################################
 clean:
-		${RM} ${OBJS} ${BONUS}
+	$(RM) $(OBJ_DIR)
 
-fclean:		clean
-		${RM} ${NAME}
+fclean:	clean
+	$(RM) $(TEST)
+	$(RM) $(NAME)
+	$(RM) $(LIB_DIR)
 
-re:		fclean all
+re:	clean	all
 
-bonus:		${NAME} ${BONUS}
-		${LIB} ${NAME} ${BONUS}
-
-.PHONY:	clean re fclean
+.PHONY: clean fclean re
