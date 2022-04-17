@@ -13,5 +13,6 @@ enum	{
 
 int	types_test();
 int	mem_test();
+int	str_test();
 
 #endif

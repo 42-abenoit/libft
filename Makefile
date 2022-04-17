@@ -101,6 +101,16 @@ OBJ_STR_DIR=$(OBJ_DIR)/str
 
 SRC_STR_NAME+=ft_putstr.c
 SRC_STR_NAME+=ft_putchar.c
+SRC_STR_NAME+=ft_strcat.c
+SRC_STR_NAME+=ft_strncat.c
+SRC_STR_NAME+=ft_strchr.c
+SRC_STR_NAME+=ft_strrchr.c
+SRC_STR_NAME+=ft_strchrnul.c
+SRC_STR_NAME+=ft_strcmp.c
+SRC_STR_NAME+=ft_strncmp.c
+SRC_STR_NAME+=ft_strcmp_nocase.c
+SRC_STR_NAME+=ft_strcpy.c
+SRC_STR_NAME+=ft_strncpy.c
 
 OBJ_STR_NAME=$(SRC_STR_NAME:.c=.o)
 
@@ -115,6 +125,8 @@ LIB_STR= -lft_str
 ALL_NAMES+= $(STR_NAME)
 
 ALL_OBJ+=$(STR_OBJ)
+
+SRC_NAME+=str_test.c
 
 ################################################################################
 ###################     Type utilities variables            ####################
