@@ -3,6 +3,8 @@
 
 #include <stddef.h>
 
+int		ft_isset(int c, const char *str);
+
 void	ft_putchar(const int c);
 void	ft_putstr(const char *str);
 
@@ -16,5 +18,7 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_strcmp_nocase(const char *s1, const char *s2);
 char	*ft_strcpy(char *dest, const char *src);
 char	*ft_strncpy(char *dest, const char *src, size_t n);
+size_t	ft_strcspn(const char *str, const char *reject);
+char	*ft_strdup(const char *str);
 
 #endif

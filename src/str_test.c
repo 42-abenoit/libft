@@ -70,6 +70,10 @@ static int	ft_test_str()	{
 	ft_putstr("ft_strncpy: ");
 	ft_putstr(ft_strncpy(str_5, str_6, 4));
 	ft_putchar('\n');
+
+	ft_putstr("ft_strcspn: ");
+	ft_putchar(ft_strcspn(str_5, "d") + '0');
+	ft_putchar('\n');
 	return (0);
 }
 
@@ -141,6 +145,10 @@ static int	test_str()	{
 
 	ft_putstr("strncpy: ");
 	ft_putstr(strncpy(str_5, str_6, 4));
+	ft_putchar('\n');
+
+	ft_putstr("strcspn: ");
+	ft_putchar(strcspn(str_5, "d") + '0');
 	ft_putchar('\n');
 	return (0);
 }

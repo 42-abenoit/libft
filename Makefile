@@ -111,6 +111,8 @@ SRC_STR_NAME+=ft_strncmp.c
 SRC_STR_NAME+=ft_strcmp_nocase.c
 SRC_STR_NAME+=ft_strcpy.c
 SRC_STR_NAME+=ft_strncpy.c
+SRC_STR_NAME+=ft_strcspn.c
+SRC_STR_NAME+=ft_strdup.c
 
 OBJ_STR_NAME=$(SRC_STR_NAME:.c=.o)
 
