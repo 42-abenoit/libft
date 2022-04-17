@@ -11,6 +11,7 @@ enum	{
 	ERROR
 };
 
-typedef unsigned long int t_size;
+int	types_test();
+int	mem_test();
 
 #endif

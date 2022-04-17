@@ -35,23 +35,32 @@ OBJ=$(addprefix $(OBJ_DIR)/,$(OBJ_NAME))
 
 TEST=test
 
-NAME=libft
+NAME=$(LIB_DIR)/libft.a
 
 CC=clang
 
-LINK= ar -rc
+LINK= ar -rcs
 
 RM= rm -rf
 
 CFLAGS+= -Wall
 CFLAGS+= -Werror
 CFLAGS+= -Wextra
+
+ifeq ($(d), 0)
 CFLAGS+= -g
 CFLAGS+= -fsanitize=address
+endif
+ifeq ($(d), 1)
+CFLAGS+= -g
+CFLAGS+= -fsanitize=thread
+endif
 
 INC= -I $(INC_DIR)
 
 LIB= -L $(LIB_DIR)
+
+LIBFT= -lft
 
 ################################################################################
 ###################     Memory utilities variables          ####################
@@ -60,7 +69,10 @@ SRC_MEM_DIR=$(SRC_DIR)/mem
 
 OBJ_MEM_DIR=$(OBJ_DIR)/mem
 
-SRC_MEM_NAME=ft_memcpy.c
+SRC_MEM_NAME+=ft_memset.c
+SRC_MEM_NAME+=ft_memcpy.c
+SRC_MEM_NAME+=ft_memmove.c
+SRC_MEM_NAME+=ft_memchr.c
 
 OBJ_MEM_NAME=$(SRC_MEM_NAME:.c=.o)
 
@@ -70,9 +82,13 @@ MEM_OBJ=$(addprefix $(OBJ_MEM_DIR)/,$(OBJ_MEM_NAME))
 
 MEM_NAME=$(LIB_DIR)/libft_mem.a
 
-ALL+= -lft_mem
+LIB_MEM= -lft_mem
 
 ALL_NAMES+= $(MEM_NAME)
+
+ALL_OBJ+=$(MEM_OBJ)
+
+SRC_NAME+=mem_test.c
 
 ################################################################################
 ###################     String utilities variables          ####################
@@ -81,7 +97,8 @@ SRC_STR_DIR=$(SRC_DIR)/str
 
 OBJ_STR_DIR=$(OBJ_DIR)/str
 
-SRC_STR_NAME=ft_putstr.c
+SRC_STR_NAME+=ft_putstr.c
+SRC_STR_NAME+=ft_putchar.c
 
 OBJ_STR_NAME=$(SRC_STR_NAME:.c=.o)
 
@@ -91,10 +108,11 @@ STR_OBJ=$(addprefix $(OBJ_STR_DIR)/,$(OBJ_STR_NAME))
 
 STR_NAME=$(LIB_DIR)/libft_str.a
 
-ALL+= -lft_str
+LIB_STR= -lft_str
 
 ALL_NAMES+= $(STR_NAME)
 
+ALL_OBJ+=$(STR_OBJ)
 
 ################################################################################
 ###################     Type utilities variables            ####################
@@ -116,6 +134,8 @@ SRC_TYPES_NAME+=ft_isupper.c
 SRC_TYPES_NAME+=ft_isxdigit.c
 SRC_TYPES_NAME+=ft_isascii.c
 SRC_TYPES_NAME+=ft_isblank.c
+SRC_TYPES_NAME+=ft_tolower.c
+SRC_TYPES_NAME+=ft_toupper.c
 
 OBJ_TYPES_NAME=$(SRC_TYPES_NAME:.c=.o)
 
@@ -125,19 +145,26 @@ TYPES_OBJ=$(addprefix $(OBJ_TYPES_DIR)/, $(OBJ_TYPES_NAME))
 
 TYPES_NAME=$(LIB_DIR)/libft_types.a
 
-ALL+= -lft_types
+LIB_TYPES= -lft_types
 
 ALL_NAMES+= $(TYPES_NAME)
+
+ALL_OBJ+=$(TYPES_OBJ)
+
+SRC_NAME+=types_test.c
 
 ################################################################################
 ###################           General recipes               ####################
 ################################################################################
-all:	$(TEST)
+all:	$(NAME)
 
-$(TEST): $(ALL) $(OBJ)
-	$(CC) $(CFLAGS) -o $(TEST) $(OBJ) $(LIB) $(ALL) $(INC)
+$(NAME): $(ALL_OBJ)	| $(LIB_DIR)
+	$(LINK) -o $(NAME) $(ALL_OBJ)
 
-$(ALL): $(ALL_NAMES)
+test:	$(OBJ) $(NAME)
+	$(CC) $(CFLAGS) -o $(TEST) $(OBJ) $(LIB) $(LIBFT) $(INC)
+
+libs: $(ALL_NAMES)
 
 mem:	$(MEM_NAME)
 
@@ -196,7 +223,6 @@ clean:
 
 fclean:	clean
 	$(RM) $(TEST)
-	$(RM) $(NAME)
 	$(RM) $(LIB_DIR)
 
 re:	clean	all
