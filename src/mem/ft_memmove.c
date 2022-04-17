@@ -1,8 +1,8 @@
 #include <stddef.h>
 
-void	ft_memmove(void *dest, void *src, size_t n)	{
+void	ft_memmove(void *dest, const void *src, size_t n)	{
 	char	*dest_ptr;
-	char	*src_ptr;
+	const char	*src_ptr;
 
 	if (dest < src)	{
 		dest_ptr = dest;

@@ -73,6 +73,8 @@ SRC_MEM_NAME+=ft_memset.c
 SRC_MEM_NAME+=ft_memcpy.c
 SRC_MEM_NAME+=ft_memmove.c
 SRC_MEM_NAME+=ft_memchr.c
+SRC_MEM_NAME+=ft_memcmp.c
+SRC_MEM_NAME+=ft_bzero.c
 
 OBJ_MEM_NAME=$(SRC_MEM_NAME:.c=.o)
 
