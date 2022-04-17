@@ -103,9 +103,19 @@ SRC_TYPES_DIR=$(SRC_DIR)/types
 
 OBJ_TYPES_DIR=$(OBJ_DIR)/types
 
-SRC_TYPES_NAME+=ft_isascii.c
+SRC_TYPES_NAME+=ft_isalnum.c
 SRC_TYPES_NAME+=ft_isalpha.c
+SRC_TYPES_NAME+=ft_iscntrl.c
 SRC_TYPES_NAME+=ft_isdigit.c
+SRC_TYPES_NAME+=ft_isgraph.c
+SRC_TYPES_NAME+=ft_islower.c
+SRC_TYPES_NAME+=ft_isprint.c
+SRC_TYPES_NAME+=ft_ispunct.c
+SRC_TYPES_NAME+=ft_isspace.c
+SRC_TYPES_NAME+=ft_isupper.c
+SRC_TYPES_NAME+=ft_isxdigit.c
+SRC_TYPES_NAME+=ft_isascii.c
+SRC_TYPES_NAME+=ft_isblank.c
 
 OBJ_TYPES_NAME=$(SRC_TYPES_NAME:.c=.o)
 
