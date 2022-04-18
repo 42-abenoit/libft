@@ -99,6 +99,7 @@ SRC_STR_DIR=$(SRC_DIR)/str
 
 OBJ_STR_DIR=$(OBJ_DIR)/str
 
+SRC_STR_NAME+=ft_isset.c
 SRC_STR_NAME+=ft_putstr.c
 SRC_STR_NAME+=ft_putchar.c
 SRC_STR_NAME+=ft_strcat.c
@@ -108,11 +109,18 @@ SRC_STR_NAME+=ft_strrchr.c
 SRC_STR_NAME+=ft_strchrnul.c
 SRC_STR_NAME+=ft_strcmp.c
 SRC_STR_NAME+=ft_strncmp.c
-SRC_STR_NAME+=ft_strcmp_nocase.c
+SRC_STR_NAME+=ft_strcasecmp.c
+SRC_STR_NAME+=ft_strncasecmp.c
 SRC_STR_NAME+=ft_strcpy.c
 SRC_STR_NAME+=ft_strncpy.c
 SRC_STR_NAME+=ft_strcspn.c
 SRC_STR_NAME+=ft_strdup.c
+SRC_STR_NAME+=ft_strndup.c
+SRC_STR_NAME+=ft_strlen.c
+SRC_STR_NAME+=ft_strpbrk.c
+SRC_STR_NAME+=ft_strspn.c
+SRC_STR_NAME+=ft_strstr.c
+SRC_STR_NAME+=ft_strcasestr.c
 
 OBJ_STR_NAME=$(SRC_STR_NAME:.c=.o)
 

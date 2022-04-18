@@ -1,3 +1,5 @@
+#include <stdlib.h>
+#include <malloc.h>
 #include <string.h>
 #include "str.h"
 
@@ -59,8 +61,8 @@ static int	ft_test_str()	{
 	char	str_7[] = "abcdefg";
 	char	str_8[] = "ABCDEFG";
 
-	ft_putstr("ft_strcmp_nocase: ");
-	ft_putchar(ft_strcmp_nocase(str_7, str_8));
+	ft_putstr("ft_strcasecmp: ");
+	ft_putchar(ft_strcasecmp(str_7, str_8));
 	ft_putchar('\n');
 
 	ft_putstr("ft_strcpy: ");
@@ -73,6 +75,26 @@ static int	ft_test_str()	{
 
 	ft_putstr("ft_strcspn: ");
 	ft_putchar(ft_strcspn(str_5, "d") + '0');
+	ft_putchar('\n');
+
+	char	*ptr;
+
+	ft_putstr("ft_strdup: ");
+	ptr = ft_strdup(str_5);
+	ft_putstr(ptr);
+	ft_putchar('\n');
+	free(ptr);
+	ptr = NULL;
+
+	ft_putstr("ft_strndup: ");
+	ptr = ft_strndup(str_5, 4);
+	ft_putstr(ptr);
+	ft_putchar('\n');
+	free(ptr);
+	ptr = NULL;
+
+	ft_putstr("ft_strlen: ");
+	ft_putchar(ft_strlen(str_6) + '0');
 	ft_putchar('\n');
 	return (0);
 }
@@ -149,6 +171,26 @@ static int	test_str()	{
 
 	ft_putstr("strcspn: ");
 	ft_putchar(strcspn(str_5, "d") + '0');
+	ft_putchar('\n');
+
+	char	*ptr;
+
+	ft_putstr("strdup: ");
+	ptr = strdup(str_5);
+	ft_putstr(ptr);
+	ft_putchar('\n');
+	free(ptr);
+	ptr = NULL;
+
+	ft_putstr("strndup: ");
+	ptr = strndup(str_5, 4);
+	ft_putstr(ptr);
+	ft_putchar('\n');
+	free(ptr);
+	ptr = NULL;
+
+	ft_putstr("strlen: ");
+	ft_putchar(strlen(str_6) + '0');
 	ft_putchar('\n');
 	return (0);
 }
