@@ -1,3 +1,5 @@
+#include <stddef.h>
+
 char	*ft_strcasestr(const char *haystack, const char *needle)	{
 	const char	*hptr;
 	const char	*nptr;

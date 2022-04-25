@@ -1,3 +1,5 @@
+#include <stddef.h>
+
 char	*ft_strstr(const char *haystack, const char *needle)	{
 	const char	*hptr;
 	const char	*nptr;
