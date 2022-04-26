@@ -121,6 +121,9 @@ SRC_STR_NAME+=ft_strpbrk.c
 SRC_STR_NAME+=ft_strspn.c
 SRC_STR_NAME+=ft_strstr.c
 SRC_STR_NAME+=ft_strcasestr.c
+SRC_STR_NAME+=ft_strlcpy.c
+SRC_STR_NAME+=ft_strlcat.c
+SRC_STR_NAME+=ft_strnstr.c
 
 OBJ_STR_NAME=$(SRC_STR_NAME:.c=.o)
 
@@ -178,6 +181,31 @@ ALL_OBJ+=$(TYPES_OBJ)
 SRC_NAME+=types_test.c
 
 ################################################################################
+###################     Stdlib utilities variables          ####################
+################################################################################
+SRC_STDLIB_DIR=$(SRC_DIR)/stdlib
+
+OBJ_STDLIB_DIR=$(OBJ_DIR)/stdlib
+
+SRC_STDLIB_NAME+=ft_atoi.c
+
+OBJ_STDLIB_NAME=$(SRC_STDLIB_NAME:.c=.o)
+
+STDLIB_SRC=$(addprefix $(SRC_STDLIB_DIR)/,$(SRC_STDLIB_NAME))
+
+STDLIB_OBJ=$(addprefix $(OBJ_STDLIB_DIR)/, $(OBJ_STDLIB_NAME))
+
+STDLIB_NAME=$(LIB_DIR)/libft_stdlib.a
+
+LIB_STDLIB= -lft_stdlib
+
+ALL_NAMES+= $(STDLIB_NAME)
+
+ALL_OBJ+=$(STDLIB_OBJ)
+
+SRC_NAME+=stdlib_test.c
+
+################################################################################
 ###################           General recipes               ####################
 ################################################################################
 all:	$(NAME)
@@ -205,6 +233,11 @@ types:	$(TYPES_NAME)
 $(TYPES_NAME):	$(TYPES_OBJ) | $(LIB_DIR)
 	$(LINK) -o $(TYPES_NAME) $(TYPES_OBJ)
 
+stdlib:	$(STDLIB_NAME)
+
+$(STDLIB_NAME):	$(STDLIB_OBJ) | $(LIB_DIR)
+	$(LINK) -o $(STDLIB_NAME) $(STDLIB_OBJ)
+
 ################################################################################
 ###################            Object recipes               ####################
 ################################################################################
@@ -219,6 +252,9 @@ $(OBJ_STR_DIR)/%.o:	$(SRC_STR_DIR)/%.c | $(OBJ_STR_DIR)
 	$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 $(OBJ_TYPES_DIR)/%.o:	$(SRC_TYPES_DIR)/%.c | $(OBJ_TYPES_DIR)
+	$(CC) $(CFLAGS) $(INC) -c $< -o $@
+
+$(OBJ_STDLIB_DIR)/%.o:	$(SRC_STDLIB_DIR)/%.c | $(OBJ_STDLIB_DIR)
 	$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 ################################################################################
@@ -237,6 +273,9 @@ $(OBJ_STR_DIR):
 	mkdir -p $@
 
 $(OBJ_TYPES_DIR):
+	mkdir -p $@
+
+$(OBJ_STDLIB_DIR):
 	mkdir -p $@
 
 ################################################################################

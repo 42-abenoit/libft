@@ -1,5 +1,5 @@
-#ifndef TYPES_H
-# define TYPES_H
+#ifndef FT_TYPES_H
+# define FT_TYPES_H
 
 int	ft_isalnum(int c);
 int	ft_isalpha(int c);

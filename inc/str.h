@@ -1,5 +1,5 @@
-#ifndef	STR_H
-# define STR_H
+#ifndef	FT_STR_H
+# define FT_STR_H
 
 #include <stddef.h>
 
@@ -46,6 +46,8 @@ char	*ft_strerror(int err_code, const char **init);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
 
+char	*ft_strnstr(const char *haystack, const char *needle, size_t n);
+
 char	*ft_strtok(char *str, const char *);
 
 /**************************************/
@@ -63,6 +65,6 @@ char	*ft_strtok_r(char *str, const char *delim, const char **saveptr);
 /***********************************/
 /* uses restrict (not implemented) */
 /***********************************/
-errno_t	ft_strcpy_s(char *s1, rsize_t s1max, const char *s2);
+//errno_t	ft_strcpy_s(char *s1, rsize_t s1max, const char *s2);
 
 #endif

@@ -1,3 +1,4 @@
+#include <stddef.h>
 #include <stdlib.h>
 
 static size_t	ft_strlen(const char *str)	{
